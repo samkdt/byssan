@@ -8,19 +8,20 @@
 <style>
 body{
 display: grid;
-grid-template-columns: 50% 50%;
+/* grid-template-columns: 50% 50%; */
 }
 
 #lagas, #klar{
 text-align:center;
 border: 2px solid;
 display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
+/*grid-template-columns: 1fr 1fr 1fr 1fr;*/
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 #lagas> h1, #klar > h1{
 width:100%;
-grid-column:1/4;
+grid-column:1/12;
 }
 
 #lagas> p, #klar > p{
@@ -34,6 +35,9 @@ word-break:break-all;
 }
 #klar > p{ background-color:#00ff00;}
 
+#lagas{
+display:none;
+}
 </style>
 </head>
 

@@ -87,6 +87,8 @@ file_put_contents("./order.json", json_encode($lista));
 <div class="gnall">
 <div><p>ingen ketchup</p><input type="checkbox" name="gnall" value="ingen ketchup"></div>
 <div><p>ingen dressing</p><input type="checkbox" name="gnall" value="ingen dressing"></div>
+<br>
+<input id="ovrigt" type="text" name="ovrigt">
 </div>
 <br>
 <input type="hidden" name="matgnall" >
@@ -102,11 +104,14 @@ if( check[i].checked == true){
 list+=check[i].value+", ";
 }
 }
+list += document.getElementById("ovrigt").value+", ";
 document.getElementsByName("matgnall")[0].value=list;
 }
+
 for (let i = 0; i <check.length ; i++) {
 check[i].addEventListener("click", gnall);
 }
+document.getElementById("ovrigt").addEventListener("keyup", gnall);
 
 function stor(){
 for (let i = 0; i <document.getElementById('vad').getElementsByTagName('div').length ; i++){

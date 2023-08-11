@@ -27,9 +27,10 @@ tr:nth-child(even) {
 <?PHP
 $klar = (int)$_GET['klar'];
 $lista=json_decode(file_get_contents("order.json"));
+if ( !empty($lista) ){
 if ( $lista[$klar][3] == false){
 $lista[$klar][3] = true;
-}
+}}
 file_put_contents("./order.json", json_encode($lista));
 ?>
 
