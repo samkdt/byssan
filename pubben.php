@@ -8,8 +8,23 @@
 <style>
 body{
 display: grid;
-grid-template-columns: 25% 50%;
+grid-template-columns: 40% 50%;
+font-size:30px;
 }
+#antal{
+font-size: 50px;
+margin: auto;
+width: 100%;
+text-align: center;
+}
+
+input {
+	width: 100%;
+	font-size: 50px;
+	padding: 10px;
+	margin: 5px;
+}
+
 #vad,.gnall  {
   display: flex;
   flex-wrap:wrap;
@@ -19,6 +34,7 @@ grid-template-columns: 25% 50%;
   display: block;
   margin: auto;
   text-align: center;
+  min-width: 4em;
 }
 br{
 display:block;
@@ -33,13 +49,14 @@ height:0px;
 <div id="senaste">
 <h1>Senaste bästelning</h1>
 <?php
-echo "<p>".$_POST["antal"]."</p><br><p>".$_POST["vad"]."</p><br><p>".$_POST["matgnall"]."</p><br><p>";
-
 $lista=json_decode(file_get_contents("order.json"));
+echo "<h3>BÄSTELLNING ".sizeof($lista)."</h3><p>".$_POST["antal"]." x ".$_POST["vad"]."</p><p>".$_POST["matgnall"]."</p><br><p>";
+
+if (!is_null($_POST["vad"])) {
 $order=array($_POST["antal"], $_POST["vad"], $_POST["matgnall"],false);
 array_push($lista, $order);
 file_put_contents("./order.json", json_encode($lista));
-
+}
 
 ?>
 </div>
@@ -47,7 +64,7 @@ file_put_contents("./order.json", json_encode($lista));
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <h1>Ta Bestälning</h1>
-<input type="number" name="antal" min="1" max="20" step="1" value="1">
+<input id="antal" type="number" name="antal" min="1" max="20" step="1" value="1">
 <br>
 <div id="vad">
 <div><p>BÖRGER</p><input type="radio" name="vad" value="enkel burgare"></div>
@@ -57,7 +74,7 @@ file_put_contents("./order.json", json_encode($lista));
 <br>
 <div class="gnall">
 <div><p>vegetarisk</p><input type="checkbox" name="gnall" value="vegetarisk"></div>
-<div><p>gluten</p><input type="checkbox" name="gnall" value="gluten"></div>
+<div><p>glutenfri</p><input type="checkbox" name="gnall" value="gluten"></div>
 </div>
 <br>
 <div class="gnall">
@@ -73,7 +90,7 @@ file_put_contents("./order.json", json_encode($lista));
 </div>
 <br>
 <input type="hidden" name="matgnall" >
-<input type="submit" value="skicka">
+<input id="klar" type="submit" value="skicka">
 </div>
 <script>
 var check=document.getElementsByName("gnall");
@@ -90,7 +107,25 @@ document.getElementsByName("matgnall")[0].value=list;
 for (let i = 0; i <check.length ; i++) {
 check[i].addEventListener("click", gnall);
 }
-</script
+
+function stor(){
+for (let i = 0; i <document.getElementById('vad').getElementsByTagName('div').length ; i++){
+document.getElementById('vad').getElementsByTagName('div')[i].addEventListener("click", function(){document.getElementById('vad').getElementsByTagName('div')[i].getElementsByTagName('input')[0].checked=true;});
+}
+for (let j = 0; j <document.getElementsByClassName('gnall').length ; j++){
+for (let i = 0; i <document.getElementsByClassName('gnall')[j].getElementsByTagName('div').length ; i++){
+document.getElementsByClassName('gnall')[j].getElementsByTagName('div')[i].addEventListener("click", function(){
+if(document.getElementsByClassName('gnall')[j].getElementsByTagName('div')[i].getElementsByTagName('input')[0].checked){
+document.getElementsByClassName('gnall')[j].getElementsByTagName('div')[i].getElementsByTagName('input')[0].checked=false;
+}else{
+document.getElementsByClassName('gnall')[j].getElementsByTagName('div')[i].getElementsByTagName('input')[0].checked=true;
+}});
+}}
+}
+
+stor();
+
+</script>
 
 
 </body>
