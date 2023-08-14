@@ -63,6 +63,8 @@ async function fetchData() {
 
 async function display() {
         const ordrar = await fetchData(); // Get the array from the order.json file
+	console.log("ordrar.length: "+ordrar.length);
+	console.log("tr.length: "+document.getElementsByTagName("tr").length);
 	if(ordrar.length > document.getElementsByTagName("tr").length){
 	console.log("updaterat");
 	lista=document.getElementById("lista");
