@@ -63,6 +63,8 @@ async function fetchData() {
 
 async function display() {
         const ordrar = await fetchData(); // Get the array from the order.json file
+	if(ordrar.length > document.getElementsByTagName("tr").length){
+	console.log("updaterat");
 	lista=document.getElementById("lista");
 	lista.innerHTML="";
 	for(let i = 0; i < ordrar.length; i++){
@@ -76,7 +78,7 @@ async function display() {
 		}
 			var col = rad.appendChild(document.createElement('td'));
 			col.innerHTML = '<a href="?klar='+i+'">[KLAR]</a>';
-	}	
+	}}	
 }
 setInterval(function () {display();}, 500);
 
