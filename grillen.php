@@ -63,15 +63,21 @@ async function fetchData() {
 
 async function display() {
         const ordrar = await fetchData(); // Get the array from the order.json file
+	var local=document.getElementsByTagName("tr").length -1;
 	console.log("ordrar.length: "+ordrar.length);
+<<<<<<< HEAD
 	console.log("tr.length: "+document.getElementsByTagName("tr").length);
 	if(ordrar.length >= document.getElementsByTagName("tr").length){
+=======
+	console.log("tr.length: "+local );
+	if(ordrar.length > local){
+>>>>>>> ef74ed7 (hade fan fixat allt localt ju glömde pusha ba)
 	console.log("updaterat");
 	lista=document.getElementById("lista");
 	lista.innerHTML="";
 	for(let i = 0; i < ordrar.length; i++){
-	if(ordrar[i][3]){continue;}
 	var rad = lista.appendChild(document.createElement('tr'));
+	if(ordrar[i][3]){rad.style.display = "none"}
 	var col = rad.appendChild(document.createElement('td'));
 	col.innerHTML = i;
 		for(let j = 0; j < ordrar[i].length-1; j++){
